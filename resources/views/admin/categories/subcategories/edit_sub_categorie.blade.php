@@ -32,7 +32,7 @@ $page = 'Sub_Categories_Edit'
 
                         <option value="" disabled selected>Select Parent Categorie </option>
                         @foreach ($parent_categories as $parent_categorie)
-                             <option value="{{$parent_categorie->id}}" @if ($parent_categorie->id == $sub_categorie->parent_categorie_id)
+                             <option value="{{$parent_categorie->parent_categorie_id}}" @if ($parent_categorie->id == $sub_categorie->parent_categorie_id)
                                  selected
                              @endif>{{$parent_categorie->parent_categorie_name}}</option>
                         @endforeach

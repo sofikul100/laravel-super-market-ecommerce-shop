@@ -24,9 +24,9 @@
               
               
           <li class="nav-item menu-open ">
-            <a href="" style="border:1px solid #009BCB;border-radius:0%" class="nav-link @if($page == "Parent_Categories" || $page == "Parent_Categories_Edit" || $page == "Sub_Categories" || $page == "Sub_Categories_Edit") active  @endif">
-              <i class="nav-icon fas fa-tachometer-alt text-dark @if($page == "Parent_Categories" || $page == "Parent_Categories_Edit" || $page == "Sub_Categories" || $page == "Sub_Categories_Edit") text-white  @endif"></i>
-              <p  style="font-size:14px;color:black;" class="@if($page == "Parent_Categories" || $page == "Parent_Categories_Edit" || $page == "Sub_Categories" || $page == "Sub_Categories_Edit") text-white  @endif">
+            <a href="" style="border:1px solid #009BCB;border-radius:0%" class="nav-link @if($page == "Parent_Categories" || $page == "Parent_Categories_Edit" || $page == "Sub_Categories" || $page == "Sub_Categories_Edit" || $page == "Child_Categories" || $page == "Child_Categories_Edit") active  @endif">
+              <i class="nav-icon fas fa-tachometer-alt text-dark @if($page == "Parent_Categories" || $page == "Parent_Categories_Edit" || $page == "Sub_Categories" || $page == "Sub_Categories_Edit" || $page == "Child_Categories" || $page == "Child_Categories_Edit") text-white  @endif"></i>
+              <p  style="font-size:14px;color:black;" class="@if($page == "Parent_Categories" || $page == "Parent_Categories_Edit" || $page == "Sub_Categories" || $page == "Sub_Categories_Edit" || $page == "Child_Categories" || $page == "Child_Categories_Edit") text-white  @endif">
                CORE FEATURES
                 <i class="right fas fa-angle-left"></i>
               </p>
@@ -40,17 +40,26 @@
               </li>
                {{-- @if($page == "subCategories") active2  @endif --}}
               <li class="nav-item">
-                <a href="{{route('sub_categories')}}" class="nav-link @if($page == "Sub_Categories") active2  @endif" id="sub_categories">
+                <a href="{{route('sub_categories')}}"  style="border-radius:0%" class="nav-link @if($page == "Sub_Categories") active2  @endif" id="sub_categories">
                   <i class="far fa-circle nav-icon text-dark @if($page == "Sub_Categories") text-white  @endif "></i>
                   <p id="side_menu_text" style="font-size:11px" class="@if($page == "Sub_Categories") text-white  @endif">SUB CATEGORIES</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon text-dark"></i>
-                  <p id="side_menu_text" style="font-size:11px">CHILD CATEGORIES</p>
+                <a href="{{route('child_categories')}}" style="border-radius:0%" class="nav-link @if($page == "Child_Categories") active2  @endif ">
+                  <i class="far fa-circle nav-icon text-dark @if($page == "Child_Categories") text-white  @endif "></i>
+                  <p id="side_menu_text" style="font-size:11px" class="@if($page == "Child_Categories") text-white  @endif">CHILD CATEGORIES</p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="" style="border-radius:0%" class="nav-link">
+                  <i class="far fa-circle nav-icon text-dark "></i>
+                  <p id="side_menu_text" style="font-size:11px" class="">BRANDS</p>
+                </a>
+              </li>
+
+
             </ul>
           </li>
         </ul>

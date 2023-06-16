@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChildCategorieController;
 use App\Http\Controllers\ParentCategorieController;
 use App\Http\Controllers\SubCategorieController;
 use App\Http\Controllers\UserController;
@@ -54,6 +55,16 @@ Route::group(['prefix'=>'admin','middleware'=>'isAdmin','auth','prevent-back-his
     Route::get('/sub-categorie-delete/{id}',[SubCategorieController::class,'delete'])->name('sub_categorie_delete');
     Route::get('/sub-categorie-edit/{id}',[SubCategorieController::class,'edit'])->name('sub_categorie_edit');
     Route::post('/sub-categorie-update/{id}',[SubCategorieController::class,'update'])->name('sub_categorie_update');
+
+
+    //================ all child categories routes here==============//
+    Route::get('/child-categories',[ChildCategorieController::class,'index'])->name('child_categories');
+    Route::post('/child-categorie-store',[ChildCategorieController::class,'store'])->name('child_categorie_store');
+    Route::get('/get-subcategorie/{parent_categorie_id}',[ChildCategorieController::class,'getSubCategorie']);
+    Route::get('/child-categorie-delete/{id}',[ChildCategorieController::class,'delete'])->name('child_categorie_delete');
+    Route::get('/child-categorie-edit/{id}',[ChildCategorieController::class,'edit'])->name('child_categorie_edit');
+    Route::get('/get-subs',[ChildCategorieController::class,'getSubCategoriesForEdit'])->name('get_sub_categories_including_parent_categorie');
+    Route::post('/child-categorie-update/{id}',[ChildCategorieController::class,'update'])->name('child_categorie_update');
 });
 
 
