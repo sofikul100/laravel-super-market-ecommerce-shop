@@ -1,0 +1,15 @@
+Super market Ecommerce shop features--
+
+1/multi-authentication systm with role base admin and uer;
+2/categorie,subcategorie,childcategorie,brand
+3/product multiple images
+4/order
+5/shipping status
+6/multiple language for blog posts
+7/user profile change password reset password
+8/multiple currency
+9/order tracking system
+10/product wishlist,add to cart , add to compare with ajax request
+11/return order
+12/payment getway
+... there are more features avabile ...
