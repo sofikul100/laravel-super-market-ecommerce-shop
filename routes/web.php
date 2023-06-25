@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ChildCategorieController;
 use App\Http\Controllers\ParentCategorieController;
 use App\Http\Controllers\SubCategorieController;
@@ -65,6 +66,13 @@ Route::group(['prefix'=>'admin','middleware'=>'isAdmin','auth','prevent-back-his
     Route::get('/child-categorie-edit/{id}',[ChildCategorieController::class,'edit'])->name('child_categorie_edit');
     Route::get('/get-subs',[ChildCategorieController::class,'getSubCategoriesForEdit'])->name('get_sub_categories_including_parent_categorie');
     Route::post('/child-categorie-update/{id}',[ChildCategorieController::class,'update'])->name('child_categorie_update');
+
+    //================= all brand routes here =============//
+    Route::get('/brands',[BrandController::class,'index'])->name('brands');
+    Route::post('/brand-store',[BrandController::class,'store'])->name('brand_store');
+    Route::get('/brand/delete',[BrandController::class,'delete'])->name('brand_delete');
+    Route::get('/brand/edit',[BrandController::class,'edit'])->name('brand_edit');
+    Route::post('/brand/update',[BrandController::class,'update'])->name('brand_update');
 });
 
 
