@@ -84,22 +84,46 @@ class BrandController extends Controller
 
     public function update (Request  $request){
         $request->validate([
-           'brand_name'=>'required'
+           'brand_name_edit'=>'required'
         ]);
 
-        $brand = Brand::find($request->id);
+        $brand = Brand::find($request->brand_id);
 
         $old_brand_logo = $brand->brand_logo;
 
         
 
 
-        if($request->brand_new_logo){
-            $imageName = time().'.'.$request->brand_new_logo->extension();
-            return response()->json($imageName);
+        if($request->brand_logo_edit){
+
+            if (file_exists(public_path('brand_images/' . $old_brand_logo))) {
+                unlink(public_path('brand_images/' . $old_brand_logo));
+            }
+
+            $originalImage= $request->brand_logo_edit;
+            $thumbnailImage = Image::make($originalImage);
+            $originalPath = public_path().'/brand_images/';
+            $thumbnailImage->resize(200,200);
+            $imageName = time().$originalImage->getClientOriginalName();
+            $thumbnailImage->save($originalPath. $imageName);
+
+            $brand->brand_name = $request->brand_name_edit;
+            $brand->brand_slug = Str::slug($request->brand_name_edit);
+            $brand->brand_logo = $imageName;
+    
+            $brand->save();
+    
+            return response()->json(['message'=>'Successfully brand updated']);
 
         }else{
-            return response()->json(['message'=>'nai']);
+
+            $brand->brand_name = $request->brand_name_edit;
+            $brand->brand_slug = Str::slug($request->brand_name_edit);
+            $brand->brand_logo = $old_brand_logo;
+    
+            $brand->save();
+    
+            return response()->json(['message'=>'Successfully brand updated']);
         }
         
     }

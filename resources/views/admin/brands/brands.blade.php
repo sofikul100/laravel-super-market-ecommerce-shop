@@ -142,10 +142,10 @@ $page = 'Brands'
 
                 <div class="d-flex flex-row justify-content-between align-items-center">
                     <div id="old_image_preview" class="mt-4">
-                        <b>Old Image : </b>
+                        <b>old Image/Images : </b>
                     </div>
                     <b class="mt-4"> Presant Image : </b>
-                    <img src="" alt="" id="brand_logo_new_preview" class="mt-4" name="brand_logo_new_preview" width="110px" height="80px" style="display:none">
+                    <img src="" alt="" id="brand_logo_new_preview" class="mt-4 mr-1" name="brand_logo_new_preview" width="110px" height="80px" style="display:none">
                 </div>
                 <br/>
                 <input type="submit" value="Update" id="brand_create_button" class=" btn btn-sm btn-outline-info" style="border-radius: 0%"> 
@@ -223,7 +223,8 @@ $(function brand() {
               data:{id:id},
               success: function (response){
                  $("#brand_name_edit").val(response.brand_name);
-                 $image = `<img src="{{asset('brand_images')}}/${response.brand_logo}" id="brand_old_preview" width="100px" height="80px"/>`;
+                 
+                 $image = `<img src="{{asset('brand_images')}}/${response.brand_logo}" id="brand_old_preview" width="50px" height="40px"/>`;
                  $("#old_image_preview").append($image);
                  $("#brand_id").val(response.id);
                 },
@@ -253,17 +254,39 @@ $(function brand() {
 
 $("#upadate_brand").submit(function (e) { 
      e.preventDefault();
-    //  let brand_name = $("#brand_name_edit").val();
-    //  let brand_new_logo = $("#brand_logo_new_preview").attr('src');
-    //  let id         = $("#brand_id").val();
+     
+     //let id = $("#brand_id").val();
+     
      $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type:"POST",
-        url:"{{route('brand_update')}}",
-        //rest of the code
+      headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url:"{{route('brand_update')}}",
+      type:"POST",
+      data:new FormData(this),
+      dataType:'JSON',
+      contentType: false,
+      cache: false,
+      processData: false,
+
+      success:function (response){
+         toastr.success(response.message);
+         $("#edit_brand_modal").modal('hide')
+         $("#brand_logo_new_preview").attr('src',' ');
+         $("#brand_logo_new_preview").css('display','none');
+         $("#brand_old_preview").attr('src',' ');
+         $("#brand_old_preview").css('display','none');
+         $("#brand_logo_edit").val();
+         $('.yTable').DataTable().ajax.reload();
+      },
+      error:function(error){
+         console.log(error)
+      }
+
      })
+
+
+
 });
 
 
